@@ -179,6 +179,103 @@ export default function StudentsPage() {
     return { text: lang === "ms" ? "Belum Jawab" : "Not Answered", cls: "text-ink/40" };
   }
 
+  function renderTable(list: Student[], includeStatus: boolean) {
+    return (
+      <>
+        {/* Desktop / tablet: normal table */}
+        <div className="mt-4 hidden overflow-x-auto rounded-2xl border border-walnut/10 md:block">
+          <table className="w-full text-left text-base">
+            <thead className="border-b-2 border-walnut/20 bg-walnut/10 text-sm font-bold uppercase tracking-wide text-walnut">
+              <tr>
+                <th className="px-5 py-4">{lang === "ms" ? "No. Tempat" : "Seat #"}</th>
+                {includeStatus && <th className="px-5 py-4">{lang === "ms" ? "Status" : "Status"}</th>}
+                <th className="px-5 py-4">{lang === "ms" ? "Nama" : "Name"}</th>
+                <th className="px-5 py-4">{lang === "ms" ? "Institusi" : "Institution"}</th>
+                <th className="px-5 py-4">{lang === "ms" ? "Kategori" : "Category"}</th>
+                <th className="px-5 py-4">{lang === "ms" ? "Telefon" : "Phone"}</th>
+                <th className="px-5 py-4">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map((s) => {
+                const status = statusLabel(s);
+                return (
+                  <tr key={s.id} className="border-t border-walnut/10 even:bg-walnut/[0.04] hover:bg-teal/5">
+                    <td className="px-5 py-4 text-lg font-extrabold text-teal">
+                      {s.seat_number != null ? `#${s.seat_number}` : "—"}
+                    </td>
+                    {includeStatus && (
+                      <td className={`px-5 py-4 text-base font-bold ${status.cls}`}>{status.text}</td>
+                    )}
+                    <td className="px-5 py-4 text-base font-semibold text-walnut">{s.full_name}</td>
+                    <td className="px-5 py-4 text-base text-ink/70">{s.institution || "—"}</td>
+                    <td className="px-5 py-4 text-base text-ink/70">
+                      {s.category && CATEGORY_LABEL[s.category] ? CATEGORY_LABEL[s.category][lang] : s.category || "—"}
+                    </td>
+                    <td className="px-5 py-4 text-base text-ink/70">{s.phone || "—"}</td>
+                    <td className="px-5 py-4 text-base text-ink/70">{s.email || "—"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile: stacked cards instead of a cramped sideways-scrolling table */}
+        <div className="mt-4 space-y-3 md:hidden">
+          {list.map((s) => {
+            const status = statusLabel(s);
+            return (
+              <div key={s.id} className="rounded-2xl border border-walnut/10 bg-cream-light p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-xl font-extrabold text-teal">
+                    {s.seat_number != null ? `#${s.seat_number}` : "—"}
+                  </span>
+                  {includeStatus && (
+                    <span className={`text-sm font-bold ${status.cls}`}>{status.text}</span>
+                  )}
+                </div>
+                <p className="mt-2 text-base font-semibold text-walnut">{s.full_name || "—"}</p>
+
+                <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-sm">
+                  <dt className="text-ink/50">{lang === "ms" ? "Institusi" : "Institution"}</dt>
+                  <dd className="text-ink/80">{s.institution || "—"}</dd>
+
+                  <dt className="text-ink/50">{lang === "ms" ? "Kategori" : "Category"}</dt>
+                  <dd className="text-ink/80">
+                    {s.category && CATEGORY_LABEL[s.category] ? CATEGORY_LABEL[s.category][lang] : s.category || "—"}
+                  </dd>
+
+                  <dt className="text-ink/50">{lang === "ms" ? "Telefon" : "Phone"}</dt>
+                  <dd className="text-ink/80">
+                    {s.phone ? (
+                      <a href={`tel:${s.phone}`} className="underline">
+                        {s.phone}
+                      </a>
+                    ) : (
+                      "—"
+                    )}
+                  </dd>
+
+                  <dt className="text-ink/50">Email</dt>
+                  <dd className="truncate text-ink/80">
+                    {s.email ? (
+                      <a href={`mailto:${s.email}`} className="underline">
+                        {s.email}
+                      </a>
+                    ) : (
+                      "—"
+                    )}
+                  </dd>
+                </dl>
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
+
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 md:px-10 md:py-24">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -239,36 +336,7 @@ export default function StudentsPage() {
             {lang === "ms" ? "Tiada murid mengesahkan Ya lagi." : "No students have confirmed Yes yet."}
           </p>
         ) : (
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-walnut/10">
-            <table className="w-full text-left text-base">
-              <thead className="bg-walnut/10 text-sm font-bold uppercase tracking-wide text-walnut border-b-2 border-walnut/20">
-                <tr>
-                  <th className="px-5 py-4">{lang === "ms" ? "No. Tempat" : "Seat #"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Nama" : "Name"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Institusi" : "Institution"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Kategori" : "Category"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Telefon" : "Phone"}</th>
-                  <th className="px-5 py-4">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {attending.map((s) => (
-                  <tr key={s.id} className="border-t border-walnut/10 even:bg-walnut/[0.04] hover:bg-teal/5">
-                    <td className="px-5 py-4 text-lg font-extrabold text-teal">
-                      {s.seat_number != null ? `#${s.seat_number}` : "—"}
-                    </td>
-                    <td className="px-5 py-4 text-base font-semibold text-walnut">{s.full_name}</td>
-                    <td className="px-5 py-4 text-base text-ink/70">{s.institution || "—"}</td>
-                    <td className="px-5 py-4 text-base text-ink/70">
-                      {s.category && CATEGORY_LABEL[s.category] ? CATEGORY_LABEL[s.category][lang] : s.category || "—"}
-                    </td>
-                    <td className="px-5 py-4 text-base text-ink/70">{s.phone || "—"}</td>
-                    <td className="px-5 py-4 text-base text-ink/70">{s.email || "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          renderTable(attending, false)
         )}
       </div>
 
@@ -306,41 +374,7 @@ export default function StudentsPage() {
             {lang === "ms" ? "Tiada murid berdaftar lagi." : "No students registered yet."}
           </p>
         ) : (
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-walnut/10">
-            <table className="w-full text-left text-base">
-              <thead className="bg-walnut/10 text-sm font-bold uppercase tracking-wide text-walnut border-b-2 border-walnut/20">
-                <tr>
-                  <th className="px-5 py-4">{lang === "ms" ? "No. Tempat" : "Seat #"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Status" : "Status"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Nama" : "Name"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Institusi" : "Institution"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Kategori" : "Category"}</th>
-                  <th className="px-5 py-4">{lang === "ms" ? "Telefon" : "Phone"}</th>
-                  <th className="px-5 py-4">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {roster.map((s) => {
-                  const status = statusLabel(s);
-                  return (
-                    <tr key={s.id} className="border-t border-walnut/10 even:bg-walnut/[0.04] hover:bg-teal/5">
-                      <td className="px-5 py-4 text-lg font-extrabold text-teal">
-                        {s.seat_number != null ? `#${s.seat_number}` : "—"}
-                      </td>
-                      <td className={`px-5 py-4 text-base font-bold ${status.cls}`}>{status.text}</td>
-                      <td className="px-5 py-4 text-base font-semibold text-walnut">{s.full_name}</td>
-                      <td className="px-5 py-4 text-base text-ink/70">{s.institution || "—"}</td>
-                      <td className="px-5 py-4 text-base text-ink/70">
-                        {s.category && CATEGORY_LABEL[s.category] ? CATEGORY_LABEL[s.category][lang] : s.category || "—"}
-                      </td>
-                      <td className="px-5 py-4 text-base text-ink/70">{s.phone || "—"}</td>
-                      <td className="px-5 py-4 text-base text-ink/70">{s.email || "—"}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          renderTable(roster, true)
         )}
       </div>
     </main>
