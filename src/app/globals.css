@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  /* Base */
+  --color-cream: #F0E6D6;
+  --color-cream-light: #F5EFE6;
+  --color-ink: #33251A;
+
+  /* Heritage accent palette (from FleP26 asset study) */
+  --color-teal: #1A8C8C;
+  --color-crimson: #BF2020;
+  --color-gold: #D9A700;
+  --color-gold-etch: #D9B300;
+
+  --color-walnut: #594536;
+  --color-teak: #8C6E59;
+  --color-chocolate: #5C3D2E;
+
+  --color-pewter: #8C9299;
+  --color-slate: #4F5459;
+
+  --color-indigo-flep: #456273;
+  --color-terracotta: #A65E46;
+  --color-beige: #D1C4AE;
+
+  --color-cobalt: #0059B3;
+  --color-ochre: #CC9900;
+  --color-charcoal: #261C14;
+}
+
+@theme inline {
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-ink);
+
+  --color-cream: var(--color-cream);
+  --color-cream-light: var(--color-cream-light);
+  --color-ink: var(--color-ink);
+
+  --color-teal: var(--color-teal);
+  --color-crimson: var(--color-crimson);
+  --color-gold: var(--color-gold);
+  --color-gold-etch: var(--color-gold-etch);
+
+  --color-walnut: var(--color-walnut);
+  --color-teak: var(--color-teak);
+  --color-chocolate: var(--color-chocolate);
+
+  --color-pewter: var(--color-pewter);
+  --color-slate: var(--color-slate);
+
+  --color-indigo-flep: var(--color-indigo-flep);
+  --color-terracotta: var(--color-terracotta);
+  --color-beige: var(--color-beige);
+
+  --color-cobalt: var(--color-cobalt);
+  --color-ochre: var(--color-ochre);
+  --color-charcoal: var(--color-charcoal);
+
+  --font-sans: "Segoe UI", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+.neo-card {
+  background: var(--color-cream-light);
+  border-radius: 1.5rem;
+  box-shadow: 8px 8px 16px rgba(89,69,54,0.15), -8px -8px 16px rgba(255,255,255,0.7);
+}
