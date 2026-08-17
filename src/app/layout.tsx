@@ -5,9 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "FleP26 - Festival Lensa Pendidikan Kelantan",
-  description:
-    "Festival Filem Kelantan \"Festival Lensa Pendidikan Kelantan\" (FleP26) Peringkat Antarabangsa 2026",
+  title: "FFK - Festival Filem Kelantan",
+  description: "Festival Filem Kelantan (FFK26) Peringkat Antarabangsa 2026",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -33,7 +33,7 @@ export const competitions: Competition[] = [
   {
     slug: "video-kreatif",
     href: "/video-kreatif",
-    name: { ms: "Video Kreatif", en: "Creative Video" },
+    name: { ms: "Video Kreatif TV PSS", en: "Creative Video TV PSS" },
     tagline: {
       ms: "Pertandingan individu bertemakan 'Ilmu di Hati, Teknologi Memperkasa Generasi'.",
       en: "Individual competition themed 'Knowledge in the Heart, Technology Empowers Generations'.",

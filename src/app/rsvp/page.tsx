@@ -51,10 +51,10 @@ export default function RsvpPage() {
           {lang === "ms" ? "Pengesahan Kehadiran" : "Attendance Confirmation"}
         </p>
         <h1 className="mt-3 text-2xl font-extrabold text-walnut md:text-3xl">
-          {lang === "ms" ? "Majlis Anugerah FleP26" : "FleP26 Awards Ceremony"}
+          {lang === "ms" ? "Majlis Anugerah FFK" : "FFK Awards Ceremony"}
         </h1>
         <p className="mt-2 text-sm text-ink/60">
-          20 Ogos 2026 · Dewan Utama, UMK Kampus Jeli
+          20 Ogos 2026 · Dewan Utama, UMK Kampus Bachok
         </p>
       </div>
 

@@ -70,11 +70,11 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-gold md:text-sm">
-          {lang === "ms" ? "19 - 20 Ogos 2026" : "19 - 20 August 2026"}
+          {lang === "ms" ? "20 Ogos 2026" : "20 August 2026"}
         </p>
       <div className="mx-auto flex w-full flex-col items-center gap-1">
             <DepthText
-            text="Festival Lensa Pendidikan"
+            text="Festival Filem"
             layers={22}
             depth={1.8}
             faceColor="#F5EFE6"
@@ -106,7 +106,7 @@ export default function Hero() {
             shadow={true}
           />
         </div>
-        <p className="mt-3 text-xl font-bold text-teal md:text-2xl">(FleP26)</p>
+        <p className="mt-3 text-xl font-bold text-teal md:text-2xl">(FFK26)</p>
         <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-cream-light/70 md:text-base">
           {lang === "ms" ? "Peringkat Antarabangsa 2026" : "International Level 2026"}
         </p>

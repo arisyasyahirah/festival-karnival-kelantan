@@ -20,34 +20,50 @@ export default function LoginPage() {
     setStatus("submitting");
     setErrorMsg("");
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      setStatus("error");
-      setErrorMsg(error.message);
-      return;
-    }
-
-    // If they registered before confirming their email, the profile row only
-    // has an email on it — apply the draft they filled in at registration now.
-    const pendingRaw = localStorage.getItem("flep26_pending_profile");
-    if (pendingRaw && data.user) {
-      try {
-        const pending = JSON.parse(pendingRaw);
-        if (pending.email === data.user.email) {
-          const { email: _drop, ...fields } = pending;
-          await supabase.from("profiles").update(fields).eq("id", data.user.id);
-        }
-      } catch {
-        // ignore malformed draft
+      if (error) {
+        setStatus("error");
+        setErrorMsg(
+          error.message === "Invalid login credentials"
+            ? lang === "ms"
+              ? "Email atau kata laluan salah. Sila cuba lagi."
+              : "Incorrect email or password. Please try again."
+            : error.message
+        );
+        return;
       }
-      localStorage.removeItem("flep26_pending_profile");
-    }
 
-    router.push("/profile");
+      // If they registered before confirming their email, the profile row only
+      // has an email on it — apply the draft they filled in at registration now.
+      const pendingRaw = localStorage.getItem("flep26_pending_profile");
+      if (pendingRaw && data.user) {
+        try {
+          const pending = JSON.parse(pendingRaw);
+          if (pending.email === data.user.email) {
+            const { email: _drop, ...fields } = pending;
+            await supabase.from("profiles").update(fields).eq("id", data.user.id);
+          }
+        } catch {
+          // ignore malformed draft
+        }
+        localStorage.removeItem("flep26_pending_profile");
+      }
+
+      router.push("/profile");
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(
+        lang === "ms"
+          ? "Ralat rangkaian. Sila semak sambungan internet dan cuba lagi."
+          : "Network error. Please check your connection and try again."
+      );
+      console.error(err);
+    }
   }
 
   return (
@@ -57,7 +73,7 @@ export default function LoginPage() {
           {lang === "ms" ? "Log Masuk" : "Log In"}
         </p>
         <h1 className="mt-3 text-2xl font-extrabold text-walnut md:text-3xl">
-          FleP26
+          FFK
         </h1>
       </div>
 

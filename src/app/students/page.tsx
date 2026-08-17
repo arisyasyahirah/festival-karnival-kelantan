@@ -38,7 +38,7 @@ async function downloadPdf(
   const doc = new jsPDF({ orientation: "landscape" });
 
   doc.setFontSize(16);
-  doc.text(`${title} - FleP26`, 14, 16);
+  doc.text(`${title} - FFK`, 14, 16);
   doc.setFontSize(10);
   doc.text(new Date().toLocaleString(), 14, 22);
 

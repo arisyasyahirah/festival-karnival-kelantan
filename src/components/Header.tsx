@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { href: "/", label: { ms: "Utama", en: "Home" } },
   { href: "/filem-pendek", label: { ms: "Filem Pendek", en: "Short Film" } },
   { href: "/video-tv-pss", label: { ms: "Video TV PSS", en: "TV PSS Video" } },
-  { href: "/video-kreatif", label: { ms: "Video Kreatif", en: "Creative Video" } },
+  { href: "/video-kreatif", label: { ms: "Video Kreatif TV PSS", en: "Creative Video TV PSS" } },
   { href: "/podcast", label: { ms: "Podcast", en: "Podcast" } },
   { href: "/gallery", label: { ms: "Galeri", en: "Gallery" } },
   { href: "/live", label: { ms: "Siaran Langsung", en: "Live Stream" } },
@@ -41,9 +41,12 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-walnut/10 bg-cream-light/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg font-extrabold tracking-tight text-walnut md:text-xl">
-            FleP<span className="text-crimson">26</span>
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/logo.png"
+            alt="FFK26 Logo"
+            className="h-16 w-auto object-contain md:h-20"
+          />
         </Link>
 
         {/* Desktop nav */}

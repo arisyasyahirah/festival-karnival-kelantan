@@ -31,7 +31,7 @@ const specificTermsEn = [
 export default function VideoKreatifPage() {
   return (
     <CompetitionPageLayout
-      name={{ ms: "Video Kreatif", en: "Creative Video" }}
+      name={{ ms: "Video Kreatif TV PSS", en: "Creative Video TV PSS" }}
       colorClass="bg-gold"
       ringClass="ring-gold/20"
       eyebrow={{ ms: "Pertandingan Individu", en: "Individual Competition" }}

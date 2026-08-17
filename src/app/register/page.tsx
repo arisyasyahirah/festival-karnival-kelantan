@@ -85,43 +85,53 @@ function RegisterForm() {
 
     setStatus("submitting");
 
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    try {
+      const { data, error } = await supabase.auth.signUp({ email, password });
 
-    if (error) {
-      setStatus("error");
-      setErrorMsg(error.message);
-      return;
-    }
-
-    const profileFields = {
-      role: "student",
-      full_name: fullName,
-      institution,
-      category,
-      phone,
-    };
-
-    if (data.session && data.user) {
-      // Email confirmation is off — we're logged in immediately, save profile now
-      const { error: updateError } = await supabase
-        .from("profiles")
-        .update(profileFields)
-        .eq("id", data.user.id);
-
-      if (updateError) {
+      if (error) {
         setStatus("error");
-        setErrorMsg(updateError.message);
+        setErrorMsg(error.message);
         return;
       }
 
-      router.push("/profile");
-    } else {
-      // Email confirmation required — stash the profile draft for after they confirm + log in
-      localStorage.setItem(
-        "flep26_pending_profile",
-        JSON.stringify({ email, ...profileFields })
+      const profileFields = {
+        role: "student",
+        full_name: fullName,
+        institution,
+        category,
+        phone,
+      };
+
+      if (data.session && data.user) {
+        // Email confirmation is off — we're logged in immediately, save profile now
+        const { error: updateError } = await supabase
+          .from("profiles")
+          .update(profileFields)
+          .eq("id", data.user.id);
+
+        if (updateError) {
+          setStatus("error");
+          setErrorMsg(updateError.message);
+          return;
+        }
+
+        router.push("/profile");
+      } else {
+        // Email confirmation required — stash the profile draft for after they confirm + log in
+        localStorage.setItem(
+          "flep26_pending_profile",
+          JSON.stringify({ email, ...profileFields })
+        );
+        setStatus("check-email");
+      }
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(
+        lang === "ms"
+          ? "Ralat rangkaian. Sila semak sambungan internet dan cuba lagi."
+          : "Network error. Please check your connection and try again."
       );
-      setStatus("check-email");
+      console.error(err);
     }
   }
 
