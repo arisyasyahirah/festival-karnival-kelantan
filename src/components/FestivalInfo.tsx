@@ -67,8 +67,8 @@ export default function FestivalInfo() {
 
           <p className="mt-6 text-sm leading-relaxed text-ink/80 md:text-base">
             {lang === "ms"
-              ? "Festival Filem Kelantan (FFK26) merupakan festival pendidikan digital bertaraf antarabangsa, dianjurkan oleh Sektor Sumber dan Teknologi Pendidikan (SSTP) dengan kerjasama Universiti Malaysia Kelantan (UMK). Menghimpunkan bakat murid dari Malaysia, Indonesia, Brunei dan pelbagai negara dalam bidang perfileman, video kreatif dan podcast."
-              : "The Kelantan Film Festival (FFK26) is an international-level digital education festival, organised by the Education Resource and Technology Sector (SSTP) in collaboration with Universiti Malaysia Kelantan (UMK). It brings together student talent from Malaysia, Indonesia, Brunei and other countries in filmmaking, creative video, and podcasting."}
+              ? "Festival Filem Kelantan (FFK26) merupakan festival pendidikan digital bertaraf antarabangsa, dianjurkan oleh Sektor Sumber dan Teknologi Pendidikan (SSTP) dengan kerjasama Universiti Malaysia Kelantan (UMK). Menghimpunkan bakat murid dari Malaysia, Indonesia, Thailand dan pelbagai negara dalam bidang perfileman, video kreatif dan podcast."
+              : "The Kelantan Film Festival (FFK26) is an international-level digital education festival, organised by the Education Resource and Technology Sector (SSTP) in collaboration with Universiti Malaysia Kelantan (UMK). It brings together student talent from Malaysia, Indonesia, Thailand and other countries in filmmaking, creative video, and podcasting."}
           </p>
 
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4">
